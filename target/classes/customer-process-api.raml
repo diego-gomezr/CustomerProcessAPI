@@ -1,0 +1,36 @@
+#%RAML 1.0
+baseUri: https://mocksvc.mulesoft.com/mocks/6c9c0675-1014-450e-bbfe-73bea3538897 # 
+title: Customer Process API
+description: This API aggregate different types of customers from various data sources. 
+version: 1.0
+
+types:
+  customer: !include dataTypes/customer.raml
+
+
+/customers:
+  description: Customer collection resource
+  get:
+    description: Use this method to get all customers.
+    displayName: Get customers 
+    queryParameters:
+      type?:
+        displayName: Type of customers
+        type: string
+        example: smb
+    responses: 
+      200:
+        body: 
+          application/json:
+            example: !include examples/customers.raml
+  
+  /{customer_id}:
+    description: Get a customer from
+    get:
+      description: Retrieve information of customer using the customer id.
+      displayName: Get information from a customer
+      responses: 
+        200:
+          body: 
+            application/json:
+              example: !include examples/customer.raml
